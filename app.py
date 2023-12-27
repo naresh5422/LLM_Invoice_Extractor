@@ -37,18 +37,18 @@ def details_for_input_image(uploaded_file):
 
 
 # Initialize the streamlit setup for app
-st.set_page_config(page_title="Demo for MultiLanguage Extracter of Invoice")
-st.header("MLE for Invoice App")
-input = st.text_input("Input Prompt: ", key="input")
-uploaded_file =st.file_uploader("Choose an image...", type=["jpg","jpeg","png"])
+st.set_page_config(page_title="Demo for invoice extracter")
+st.header("details about Invoice App")
+input = st.text_input("Input_Prompt: ", key="input")
+uploaded_file =st.file_uploader("Choose an image...", type=["jpg","jpeg","png", "webp"])
 image = ""
 
 if uploaded_file is not None:
     image = Image.open(uploaded_file)
-    st.image(image, caption = "Uploaded image", use_column_width=True)
+    st.image(image, caption = "Completed image uploading", use_column_width=True)
 
 
-submit = st.button("Tell me about the Invoice")
+submit = st.button("Give me details for given query in Invoice")
 
 input_prompt = """
 
@@ -60,6 +60,6 @@ So you will definitly give me answer for my question"""
 if submit:
     image_data = details_for_input_image(uploaded_file)
     response = get_gemini_response(input_prompt, image_data, input)
-    st.subheader("The response is:")
+    st.subheader("The Reply is:")
     st.write(response)
 
